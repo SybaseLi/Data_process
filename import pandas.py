@@ -30,6 +30,7 @@ array_2[:,0]=array_0[:,0]
 ## get the point about beta-line
 for x in range(9500):
     if array_2[x,1] >= 8*np.log(2)*array_2[x,0]/((np.pi)**2):
+        # determine if the beta line crosses the PSD
         dot = x
     else:
         break
@@ -37,15 +38,18 @@ for x in range(9500):
 ## integrate the area
 integrals = []
 for i in range(dot):
-    integrals.append(scipy.integrate.trapz(array_2[:i+1,1],array_2[:i+1,0]))
+    integrals.append(scipy.integrate.
+                     trapz(array_2[:i+1,1],array_2[:i+1,0]))
 #for i in integrals:
  #   print(i)
-print(np.sqrt(8*np.log(2)*integrals[dot-1]))# print linewidth
+linewidth = np.sqrt(8*np.log(2)*integrals[dot-1])
+#print(linewidth)# print linewidth
 
-plt.xlim(1000, 50000000)
-plt.ylim(1,10000000)
+## plot FNPSD vs Freq
+plt.xlim(1e3, 5e7)
+plt.ylim(1,1e7)
 plt.xlabel("Frequency (Hz)")
 plt.ylabel("FNPSD")
 plt.loglog(array_2[:,0],array_2[:,1]) #plot with double log
-plt.text(1e5,10,'Added Text : abcd', fontsize=15)#add text to show linewidth 
+plt.text(1e5,10,round(linewidth), fontsize=15)#add text to show linewidth 
 plt.show()
