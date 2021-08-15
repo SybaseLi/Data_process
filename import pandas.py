@@ -5,11 +5,11 @@ import scipy
 from scipy.integrate import simps
 
 ## import data into py
-array_0 = pd.read_csv('G:/8-2night/90-5.csv',skiprows=45,nrows=5000)#draw data from .csv
+array_0 = pd.read_csv('G:/aug/8-15/27/44-5.csv',skiprows=45,nrows=5000)#draw data from .csv
 array_0 = array_0.values # dataframe --> array
-array_1 = pd.read_csv('G:/8-2night/90-50-860.csv',skiprows=245,nrows=1800)
+array_1 = pd.read_csv('G:/aug/8-15/27/44-50.csv',skiprows=545,nrows=4500)
 array_1 = array_1.values # dataframe --> array
-X_trans=0.86; #the voltage/1V
+X_trans=0.6; #the voltage/1V
 #print(array_1.shape) print(array_0.shape)
 
 ## Define function
@@ -23,12 +23,12 @@ def function_T(x,x_trans):
     return y
 
 ## connect arraies
-array_2 = np.zeros((6800,2))
+array_2 = np.zeros((9500,2))
 array_2[:,1]=function_T(array_0[:,1], X_trans)
 array_2[:,0]=array_0[:,0]
 
 ## get the point about beta-line
-for x in range(6800):
+for x in range(9500):
     if array_2[x,1] >= 8*np.log(2)*array_2[x,0]/((np.pi)**2):
         dot = x
     else:
@@ -47,4 +47,5 @@ plt.ylim(1,10000000)
 plt.xlabel("Frequency (Hz)")
 plt.ylabel("FNPSD")
 plt.loglog(array_2[:,0],array_2[:,1]) #plot with double log
+plt.text(1e5,10,'Added Text : abcd', fontsize=15)#add text to show linewidth 
 plt.show()
