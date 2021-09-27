@@ -5,11 +5,11 @@ import scipy
 from scipy.integrate import simps
 
 ## import data into py
-array_0 = pd.read_csv('F:/Data/Linewidth——reducation/8-18/25/10-5.csv',skiprows=45,nrows=5000)#draw data from .csv
+array_0 = pd.read_csv('F:/Data/Linewidth_reducation/25/50cm/82-5.csv',header=None,skiprows=46,nrows=5000)#draw data from .csv
 array_0 = array_0.values # dataframe --> array
-array_1 = pd.read_csv('F:/Data/Linewidth——reducation/8-18/25/10-50.csv',skiprows=545,nrows=4500)
+array_1 = pd.read_csv('F:/Data/Linewidth_reducation/25/50cm/82-50.csv',skiprows=545,nrows=4500)
 array_1 = array_1.values # dataframe --> array
-X_trans=0.865; #the voltage/1V
+X_trans=0.851; #the voltage/1V
 #print(array_1.shape) print(array_0.shape)
 
 ## Define function
@@ -43,7 +43,7 @@ for i in range(dot):
 #for i in integrals:
  #   print(i)
 linewidth = np.sqrt(8*np.log(2)*integrals[dot-1])
-#print(linewidth)# print linewidth
+print(linewidth)# print linewidth
 
 ## plot FNPSD vs Freq
 plt.xlim(1e3, 5e7)
